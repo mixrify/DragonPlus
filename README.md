@@ -4,6 +4,8 @@
 
 Dragon+ was created on **17/11/2022** (replacing PMMP+ Project), using **C#** with the aim to make a user-friendly & smart development environment. This IDE will be **free-to-use** after its release, and will not require any registration when using it.
 
+Dragon+ will also include tutorials & videos to help you out and **Docking** of items inside the IDE to make it simpler to use.
+
 ## Open Source
 
 There are no limits to what you can do with the source code, however we encourage you do not **infect** it with malware. Of course, you can create a pull request and merge your changes (If we do accept them), but they have to actually **update** Dragon+ rather than ruin it.
