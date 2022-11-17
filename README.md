@@ -1,14 +1,14 @@
-# <img src="https://media.discordapp.net/attachments/916226674071339010/1004779510866133064/ipiccy_image_5.png?width=473&height=473" width="200" height="200" alt="#">
+# <img src="https://user-images.githubusercontent.com/84229419/202377872-5111948c-0ff4-4fbd-8223-28f3ca90d025.png" height="200" alt="#">
 
-PMMP+ is a **PocketmineMultiplayer C#-Written IDE** created to write **Plugins with PHP** with the use of Systems and AI that make it easier to write them. PMMP+ supports **Co pilot** (a custom one, not GitHub co pilot), **Autocomplete Code**.
+**Dragon+** is a public **df-mc (DragonFly Minecraft)** integrated development environment created to make development easier for **df-mc** developers. This IDE will be open-source, easy to use and will have a user-friendly UI. It's currently under development, and we are welcoming developers that would like to contribute to this Project.
 
-PMMP+ was first developed at July 31st, 2022. We had the idea to overtake other PHP IDEs as most are weak in their features or are paid, therefore we made a **FREE PHP IDE** with the option to support us, but of course it's **option**al ;)
+Dragon+ was created on **17/11/2022** (replacing PMMP+ Project), using **C#** with the aim to make a user-friendly & smart development environment. This IDE will be **free-to-use** after its release, and will not require any registration when using it.
 
 ## Open Source
 
-The IDE Code will be available above the **README.md**, however not **all of the code** is public. Why? Because for us developers, there are limits to what we can show the public because we do not want people skidding our code.
+There are no limits to what you can do with the source code, however we encourage you do not **infect** it with malware. Of course, you can create a pull request and merge your changes (If we do accept them), but they have to actually **update** Dragon+ rather than ruin it.
 
-The only areas public will be the ones where you're able to customize how settings work or to build in a better system of something we made in PMMP+, or to build-in an extension manually **INSIDE** the IDE.
+Infectious merges will not be accepted.
 
 ## Contribution
 
