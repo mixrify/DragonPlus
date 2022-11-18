@@ -18,6 +18,15 @@ Current contributors: **Pronner**
 
 If you'd like to contribute, please fork the repository, add/remove or just change whatever you think should be changed and then submit a pull request.
 
+# First look (Build edb4e02)
+
+![image](https://user-images.githubusercontent.com/84229419/202713363-48b84950-425e-4551-b886-6d1ff7f054d3.png)
+
+This is currently how the IDE looks (18/11/2022).
+We're currently working our hardest to release **Dragon+** before December or January. It will have many smart and advanced features, and especially customizable features. People may not like the theme, so there will be a **Themes** option on **View->Themes**.
+
+If you'd like to know more about our plans, or contribute to the project then make sure to join our [Discord Server](https://discord.gg/M8mDcBmS).
+
 # Support us
 
 Want to help us out? Check out our [ko-fi page](https://ko-fi.com/pmmpp)! We currently support direct payments only, we do not support crypto payments yet so this is the only option as of now.
