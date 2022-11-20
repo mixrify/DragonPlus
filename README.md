@@ -1,5 +1,12 @@
 # <img src="https://user-images.githubusercontent.com/84229419/202377872-5111948c-0ff4-4fbd-8223-28f3ca90d025.png" height="200" alt="#">
 
+
+# Discontinued
+
+This project is unfortunately discontinued, however we allow anyone to make changes, or complete Dragon+ and make a pull request, we'll merge it to `main` and your update/change will be available here.
+
+# About Dragon+
+
 **Dragon+** is a public **df-mc (DragonFly Minecraft)** integrated development environment created to make development easier for **df-mc** developers. This IDE will be open-source, easy to use and will have a user-friendly UI. It's currently under development, and we are welcoming developers that would like to contribute to this Project.
 
 Dragon+ was created on **17/11/2022** (replacing PMMP+ Project), using **C#** with the aim to make a user-friendly & smart development environment. This IDE will be **free-to-use** after its release, and will not require any registration when using it.
