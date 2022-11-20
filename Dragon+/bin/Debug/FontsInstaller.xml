@@ -1,0 +1,882 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FontsInstaller</name>
+    </assembly>
+    <members>
+        <member name="T:WK.Libraries.FontsInstallerNS.FontsInstaller">
+            <summary>
+            A handy library that lets developers choose the fonts 
+            required by their applications, then auto-checks and 
+            installs them if not available on any client machine.
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates">
+            <summary>
+            Provides a list of supported string templates
+            that are generated at runtime providing a
+            qualified name based on the template selected.
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates.AppName">
+            <summary>
+            Represents the default application's name.
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates.AppVersion">
+            <summary>
+            Represents the default application's version.
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates.Fonts">
+            <summary>
+            Represents the list of user-fonts added.
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates.FontsCount">
+            <summary>
+            Represents the number of user-fonts added.
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates.InstallButtonText">
+            <summary>
+            Represents the text applied to 
+            the installation button.
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates.Empty">
+            <summary>
+            Represents an empty string template.
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates.FontsRequiredExpression">
+            <summary>
+            Represents a statement auto-generated based on the
+            number of fonts that are to be installed.
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates.FontsExpression">
+            <summary>
+            Represents a statement auto-generated based on the
+            number of fonts to be viewed within the collapsed-
+            content area of the Installer dialog.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.TestingMode">
+            <summary>
+            When set to true, the installation process will be 
+            run when debugging from Visual Studio for you to have 
+            a test preview of how the process will look like 
+            whenever fonts require to be installed. This however 
+            won't affect the execution process once your application 
+            is deployed to all users.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.DialogOptions">
+            <summary>
+            Provides a list of customization options for the
+            default Installer dialog that will be displayed once 
+            the fonts-installation process begins.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.AutoInstall">
+            <summary>
+            When set to true, the fonts-installation process 
+            will begin immediately the hosting or parent Form 
+            is launched. Otherwise when set to false, installation 
+            can be done manually using the method <see cref="M:WK.Libraries.FontsInstallerNS.FontsInstaller.Install"/> or one of 
+            its variant methods: <see cref="M:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallFont(System.String,System.Boolean)"/>, 
+            <see cref="M:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallFonts(System.String[],System.Boolean)"/>,  
+            <see cref="M:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallFonts(System.String,System.Boolean)"/>.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.AutoRestart">
+            <summary>
+            When set to true, once the fonts-installation process 
+            is completed, the application will be restarted for the 
+            font changes to take effect at the application-level. 
+            Please note that restarting your application is highly 
+            recommended since fonts initialization occurs on startup.
+            Otherwise, no changes will take effect.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.Fonts">
+            <summary>
+            Gets or sets the list of fonts that will be installed
+            on the user's machine once the application is launched.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.ParentForm">
+            <summary>
+            Gets or sets the parent form.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.CustomInstallerDialog">
+            <summary>
+            Gets or sets a custom Installer dialog 
+            to be used instead of the default dialog.
+            (Ensure you provide a button that returns 
+            <see cref="F:System.Windows.Forms.DialogResult.OK"/>; <see cref="F:System.Windows.Forms.DialogResult.Cancel"/>)
+            can also come in-handy.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.FontsListBullet">
+            <summary>
+            Gets or sets the bullet character(s) that will
+            be applied to every font item displayed within
+            the list of fonts that will be installed.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.UserCancelled">
+            <summary>
+            Gets a value indicating whether the user cancelled
+            the fonts installation dialog or process.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.UnavailableFonts">
+            <summary>
+            Gets the list of fonts to be installed on a user's 
+            machine from the <see cref="P:WK.Libraries.FontsInstallerNS.FontsInstaller.Fonts"/> provided.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallTaskCompleted">
+            <summary>
+            Gets or sets a value indicating whether
+            the fonts installation process took place 
+            and was completed, successfully or unsuccessfully.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.Instance">
+            <summary>
+            Gets an instance of <see cref="T:WK.Libraries.FontsInstallerNS.FontsInstaller"/>.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.ContainerControl">
+            <summary>
+            Gets or sets the container control within the parent form.
+            In most cases, this refers and results to the parent form.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.Site">
+            <summary>
+            Overrides the ISite functionality, getting the main or parent
+            container control in the Form. This is overriden to get the
+            component's host or parent form.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.SetDefaults">
+            <summary>
+            Sets the library-default settings.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.InvokeInstallationCompletedEvent(System.Boolean)">
+            <summary>
+            Invokes a new <see cref="E:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallationCompleted"/> event.
+            </summary>
+            <param name="success">
+            Was the fonts installation process successful?
+            </param>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.InvokeApplicationRestartingEvent(System.Boolean)">
+            <summary>
+            Invokes a new <see cref="E:WK.Libraries.FontsInstallerNS.FontsInstaller.ApplicationRestarting"/> event.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.CreateTempDirectory">
+            <summary>
+            Creates the master temporary font directory.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.WriteInstaller">
+            <summary>
+            Writes the VBScript Installer 
+            from the library's Resources.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.DeleteTempDirectory">
+            <summary>
+            Deletes the existing master temporary font directory.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.ParseDialogStrings">
+            <summary>
+            Parses the Installer dialog's string 
+            templates to human-readable strings.
+            (Called when <see cref="P:WK.Libraries.FontsInstallerNS.FontsInstaller.CustomInstallerDialog"/>
+            has been provided.)
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.StartProcess">
+            <summary>
+            Launches VBScript as a process, installing 
+            all pre-requisite fonts for the application.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:WK.Libraries.FontsInstallerNS.FontsInstaller.RunInstaller(System.Boolean)" -->
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.NotifyOnPreparation(System.Boolean)">
+            <summary>
+            [Reserved] Displays an indeterminate progress
+            window as the required fonts are being installed.
+            </summary>
+            <param name="show">Display the progress task window?</param>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.ShowInstallerDialog(System.Boolean)">
+            <summary>
+            Displays the Fonts Installer dialog window.
+            </summary>
+            <returns>The selected <see cref="T:Ookii.Dialogs.TaskDialogButton"/>.</returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.GetRawTemplateFromString(System.String)">
+            <summary>
+            Parses and returns a <see cref="T:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates"/>
+            for any specified <see cref="T:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates"/> option.
+            </summary>
+            <param name="template">The string template name.</param>
+            <returns>The specific <see cref="T:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates"/> option.</returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.GetStringFromTemplate(WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates)">
+            <summary>
+            Parses and returns a literal string specified
+            from the list of supported <see cref="T:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates"/>.
+            </summary>
+            <param name="template">The string template name.</param>
+            <param name="formatFonts">Enables/disables formatting the list of fonts.</param>
+            <returns>The readable string.</returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.GetStringFromRawTemplate(System.String)">
+            <summary>
+            Parses a raw string from the specified list of 
+            supported <see cref="T:WK.Libraries.FontsInstallerNS.FontsInstaller.StringTemplates"/> and 
+            returns in readable format.
+            </summary>
+            <param name="template">The raw string template name.</param>
+            <returns>The readable string.</returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.GetFormattedFontsList(System.Boolean)">
+            <summary>
+            Returns the list of formatted fonts
+            based on the <see cref="P:WK.Libraries.FontsInstallerNS.FontsInstaller.Fonts"/> property.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.DebugMode">
+            <summary>
+            Determines whether the library is being run
+            from Visual Studio. This works in both the 'Debug'
+            and 'Release' modes of an executing application.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.GetFontName(System.String)">
+            <summary>
+            Gets the actual name of the font from the font-file specified.
+            </summary>
+            <param name="fontFile">The full path to the TrueType font-file.</param>
+            <returns>The font-name if found, or <see cref="F:System.String.Empty"/> if no name is found.</returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.GetFontPath(System.String,System.Boolean)">
+            <summary>
+            Gets the full path to any font installed in the system.
+            </summary>
+            <param name="fontName">The font name.</param>
+            <param name="useCache">
+            If set to true, the current list of fonts installed will 
+            be used during the search; else, a forced search for the font 
+            specified will be made in the Windows Fonts directory until found.
+            </param>
+            <returns>
+            The full path to the specified font; else returns 
+            an empty <see cref="T:System.String"/> if the font is not available.
+            </returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.IsFontInstalled(System.String)">
+            <summary>
+            Checks if any particular font installed using its font-file.
+            Acts as a short-hand method for the <see cref="M:WK.Libraries.FontsInstallerNS.FontsInstaller.IsFontInstalled(System.String,System.Drawing.FontStyle)"/> method.
+            </summary>
+            <param name="fontFile">The path to the font-file.</param>
+            <returns><see cref="!:true"/>/<see cref="!:false"/></returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.IsFontInstalled(System.String,System.Drawing.FontStyle)">
+            <summary>
+            Checks if any particular font installed using its font-file.
+            </summary>
+            <param name="fontFile">The path to the font-file.</param>
+            <param name="fontStyle">The font-style to check for availability.</param>
+            <returns><see cref="!:true"/>/<see cref="!:false"/></returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.GetUnavailableFontsList">
+            <summary>
+            Gets the list of unavailable fonts in the system.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.GetInstalledFonts">
+            <summary>
+            Gets the list of installed fonts in the system
+            as per the list of added fonts to install.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.GetUninstalledFonts">
+            <summary>
+            Gets the list of uninstalled fonts in the system
+            as per the list of added fonts to install.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.RefreshFontsCollection">
+            <summary>
+            Refreshes the list of fonts installed in the system.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.Install">
+            <summary>
+            Checks and installs all the fonts added in 
+            the <see cref="P:WK.Libraries.FontsInstallerNS.FontsInstaller.Fonts"/> collection property.
+            </summary>
+            <returns>
+            <see cref="!:true"/> if installation was
+            successful or the font was available, 
+            else returns <see cref="!:false"/>.
+            </returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallFont(System.String,System.Boolean)">
+            <summary>
+            Checks and installs any TrueType font-file.
+            </summary>
+            <param name="fontFile">
+            The path to any TrueType font-file.
+            </param>
+            <param name="showDialog">
+            Displays a fonts installation 
+            dialog when set to <see cref="!:true"/>.
+            </param>
+            <returns>
+            <see cref="!:true"/> if installation was
+            successful or the fonts were available; 
+            else returns <see cref="!:false"/>.
+            </returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallFonts(System.String[],System.Boolean)">
+            <summary>
+            Checks and installs a list of TrueType font-files.
+            </summary>
+            <param name="fontFiles">
+            An array of TrueType font-files.
+            </param>
+            <param name="showDialog">
+            Displays a fonts installation 
+            dialog when set to <see cref="!:true"/>.
+            </param>
+            <returns>
+            <see cref="!:true"/> if installation was
+            successful or the fonts were available; 
+            else returns <see cref="!:false"/>.
+            </returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallFonts(System.String,System.Boolean)">
+            <summary>
+            Checks and installs all TrueType fonts within a specified folder.
+            </summary>
+            <param name="fontsFolder">
+            Path to the folder containing the fonts.
+            </param>
+            <param name="showDialog">
+            Displays a fonts installation 
+            dialog when set to <see cref="!:true"/>.
+            </param>
+            <returns>
+            <see cref="!:true"/> if installation was
+            successful or the fonts were available; 
+            else returns <see cref="!:false"/>.
+            </returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.ShowRestartDialog(System.Int32,System.Boolean)">
+            <summary>
+            Displays the Restart dialog window. This dialog blocks and
+            displays for a set period of time before closing to inform 
+            users that a restart event is about to occur. Such a scenario
+            is applicable only after the fonts installation process has been
+            completed, both via manual and automatic installation. 
+            </summary>
+            <param name="timeout">
+            The time (in milliseconds) to wait before 
+            the dialog auto-closes.
+            </param>
+            <param name="restartOnFinish">
+            When set to true, the application will
+            be restarted once the dialog closes.
+            </param>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.HideParentWindow">
+            <summary>
+            Hides the <see cref="P:WK.Libraries.FontsInstallerNS.FontsInstaller.ParentForm"/> window by
+            minimizing it and fully reducing its opacity.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.ParseString(System.String)">
+            <summary>
+            Parses a <see cref="T:System.String"/> containing the predefined string 
+            template options used in the <see cref="P:WK.Libraries.FontsInstallerNS.FontsInstaller.DialogOptions"/> property, 
+            and returns the parsed content in the same <see cref="T:System.String"/> format.
+            </summary>
+            <param name="content">The string to parse.</param>
+            <returns>The parsed content.</returns>
+        </member>
+        <member name="E:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallingFonts">
+            <summary>
+            Raised once the fonts installation process begins.
+            </summary>
+        </member>
+        <member name="E:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallationCompleted">
+            <summary>
+            Raised once the fonts installation 
+            process is completed.
+            </summary>
+        </member>
+        <member name="E:WK.Libraries.FontsInstallerNS.FontsInstaller.ApplicationRestarting">
+            <summary>
+            Raised before the application restarts once the fonts 
+            installation process is completed. Adding this event 
+            will disable the default 'AutoRestart' feature and allow 
+            you to manually restart your application if you need to 
+            perform other tasks beforehand. Please note that restarting 
+            your application is highly recommended in order to effect 
+            the font changes at the application level.
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallationCompletedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallationCompleted"/> event.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallationCompletedEventArgs.#ctor(System.Boolean,System.Boolean,System.Collections.Generic.List{WK.Libraries.FontsInstallerNS.Models.UserFont},System.Collections.Generic.List{WK.Libraries.FontsInstallerNS.Models.UserFont})">
+            <summary>
+            Provides data for the <see cref="E:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallationCompleted"/> event.
+            </summary>
+            <param name="fontsInstalled">
+            The list of fonts that have been installed successfully.
+            </param>
+            <param name="fontsNotInstalled">
+            The list of fonts that have not been installed successfully.
+            </param>
+            <param name="success">
+            Was the fonts installation process successful?
+            </param>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallationCompletedEventArgs.InstallationSucceeded">
+            <summary>
+            Gets a value indicating whether the 
+            fonts installation process succeeded.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallationCompletedEventArgs.UserCancelled">
+            <summary>
+            Gets a value indicating whether the user cancelled the
+            fonts installation process. This is only necessary when
+            the <see cref="!:DialogOptions.ShowCancelButton"/> property
+            is set to true, or a <see cref="P:WK.Libraries.FontsInstallerNS.FontsInstaller.CustomInstallerDialog"/> 
+            with a <see cref="F:System.Windows.Forms.DialogResult.Cancel"/> option has been provided.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallationCompletedEventArgs.FontsInstalled">
+            <summary>
+            Gets the list of fonts that
+            have been installed successfully.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.InstallationCompletedEventArgs.FontsNotInstalled">
+            <summary>
+            Gets the list of fonts that have
+            not been installed successfully.
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.FontsInstaller.ApplicationRestartingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:WK.Libraries.FontsInstallerNS.FontsInstaller.ApplicationRestarting"/> event.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.ApplicationRestartingEventArgs.#ctor(System.Boolean)">
+            <summary>
+            Provides data for the <see cref="E:WK.Libraries.FontsInstallerNS.FontsInstaller.ApplicationRestarting"/> event.
+            </summary>
+            <param name="success">
+            Was the fonts installation process successful?
+            </param>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.FontsInstaller.ApplicationRestartingEventArgs.InstallationSucceeded">
+            <summary>
+            Gets a value indicating whether the 
+            fonts installation process succeeded.
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.FontsInstaller.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.FontsInstaller.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.Models.UserFont">
+            <summary>
+            Defines a base class that hosts the necessary
+            font information to be used when parsing any 
+            font required by the target application.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Models.UserFont.#ctor">
+            <summary>
+            Creates a new instance of <see cref="T:WK.Libraries.FontsInstallerNS.Models.UserFont"/>.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Models.UserFont.#ctor(System.String)">
+            <summary>
+            Creates a new instance of <see cref="T:WK.Libraries.FontsInstallerNS.Models.UserFont"/>.
+            </summary>
+            <param name="fontName">Provide a valid font name.</param>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.UserFont.ExtractFontName">
+            <summary>
+            When set to true, the font name will be extracted
+            from the font-file specified. However, when set to 
+            false, the font-file's name name will be used instead.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.UserFont.Path">
+            <summary>
+            As an alternative to adding/selecting a font's name using 
+            the <see cref="P:WK.Libraries.FontsInstallerNS.Models.UserFont.Name"/> property, this property allows you
+            to add a font by providing the path to any TrueType font-file.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.UserFont.Name">
+            <summary>
+            Gets or sets the font to be installed on the user's machine.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.UserFont.FontBytes">
+            <summary>
+            Gets or sets the font data in <see cref="T:System.Byte"/> collection format.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Models.UserFont.GetFontName(System.String)">
+            <summary>
+            Gets the actual name of the font from the font-file specified.
+            </summary>
+            <param name="fontFile">The full path to the TrueType font-file.</param>
+            <returns>The font-name if found, or <see cref="F:System.String.Empty"/> if no name is found.</returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Models.UserFont.GetFontPath(System.String,System.Boolean)">
+            <summary>
+            Gets the full path to any font installed in the system.
+            </summary>
+            <param name="fontName">The font name.</param>
+            <param name="useCache">
+            If set to true, the current list of fonts installed will 
+            be used during the search; else, a forced search for the font 
+            specified will be made in the Windows Fonts directory until found.
+            </param>
+            <returns>
+            The full path to the specified font; else returns 
+            an empty <see cref="T:System.String"/> if the font is not available.
+            </returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Models.UserFont.IsFontInstalled(System.String)">
+            <summary>
+            Checks if any particular font installed using its valid name.
+            Acts as a short-hand method for the <see cref="M:WK.Libraries.FontsInstallerNS.Models.UserFont.IsFontInstalled(System.String,System.Drawing.FontStyle)"/> method.
+            </summary>
+            <param name="fontFile">The path to the font-file.</param>
+            <returns><see cref="!:true"/>/<see cref="!:false"/></returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Models.UserFont.IsFontInstalled(System.String,System.Drawing.FontStyle)">
+            <summary>
+            Checks if any particular font installed using its valid name.
+            a specified font-style option.
+            </summary>
+            <param name="fontFile">The path to the font-file.</param>
+            <param name="fontStyle">The font-style to check for availability.</param>
+            <returns><see cref="!:true"/>/<see cref="!:false"/></returns>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Models.UserFont.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> containing the 
+            name of the font-file selected.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.Models.InstallerDialogOptions">
+            <summary>
+            Defines a base class that hosts the necessary options 
+            required to display the default Fonts Installer dialog.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Models.InstallerDialogOptions.#ctor">
+            <summary>
+            Creates a new Installer dialog options object.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.InstallerDialogOptions.WindowTitle">
+            <summary>
+            Gets or sets the Installer dialog's window title.
+            This refers to the title shown within the 
+            Title Bar area of the dialog window.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.InstallerDialogOptions.Title">
+            <summary>
+            Gets or sets the Installer dialog's main title.
+            This refers to the title shown within the 
+            content area of the dialog window.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.InstallerDialogOptions.Content">
+            <summary>
+            Gets or sets the Installer dialog's main content.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.InstallerDialogOptions.CollapsedContent">
+            <summary>
+            Gets or sets the Installer dialog's collapsed content.
+            The collapsed content by default is set to be the list of 
+            fonts that will be installed in a user's computer.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.InstallerDialogOptions.UseElevationIcon">
+            <summary>
+            When set to true, a Windows Elevation icon 
+            will be displayed in the 'Install' button 
+            in-place of the standard Arrow icon.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.InstallerDialogOptions.ShowCancelButton">
+            <summary>
+            Gets or sets a value indicating whether a 'Cancel' 
+            button will be displayed in the Installer dialog
+            to allow exiting the fonts-installation process. 
+            [Default: <see cref="!:false"/>]
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.InstallerDialogOptions.ShowAppIcon">
+            <summary>
+            When set to true, the current application's icon 
+            will be displayed in the Installation dialog. 
+            This can visually help assure the user of the
+            dialog's express origin.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Models.InstallerDialogOptions.CustomIcon">
+            <summary>
+            Lets you provide a custom icon file to
+            be used as the Installer dialog's icon.
+            (TIP: Pass the string "(default)" without 
+            quotes to apply the default Fonts Installer icon.)
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Models.InstallerDialogOptions.ToString">
+            <summary>
+            Returns the default <see cref="T:System.String"/>
+            as specified in the Properties window.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.Editors.FontSelectionEditor">
+            <summary>
+            Provides a custom Font Selection UI Editor
+            for selecting fonts via the Properties window.
+            (Please note that this only returns a font's name.)
+            <para>
+            Example:
+            <code>
+            [Editor(typeof(FontSelectionEditor), typeof(UITypeEditor))]
+            public string MyFont { get; set; }
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.Editors.FontFileSelectionEditor">
+            <summary>
+            Provides a custom Font File Selection UI Editor
+            for selecting TrueType fonts using Windows Explorer
+            from the Properties window.
+            <para>
+            Example:
+            <code>
+            [Editor(typeof(FontFileSelectionEditor), typeof(UITypeEditor))]
+            public string MyFontPath { get; set; }
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.Editors.IconSelectionEditor">
+            <summary>
+            Provides a custom Icon Selection UI Editor
+            for selecting Icons using Windows Explorer
+            from the Properties window.
+            <para>
+            Example:
+            <code>
+            [Editor(typeof(IconSelectionEditor), typeof(UITypeEditor))]
+            public string MyIcon { get; set; }
+            </code>
+            </para>
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.Editors.DialogStringsEditor">
+            <summary>
+            Provides a custom Dialog Strings UI Editor
+            for editing the Installer dialog's strings
+            from the Properties window.
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.Editors.DialogPreviewEditor">
+            <summary>
+            Provides a dialog-based editor that displays 
+            the Installer dialog from the Properties window.
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.Designer.WKDesigner">
+            <summary>
+            Provides <see cref="T:WK.Libraries.FontsInstallerNS.FontsInstaller"/> design-time features.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Designer.WKDesigner.#ctor">
+            <summary>
+            Provides <see cref="T:WK.Libraries.FontsInstallerNS.FontsInstaller"/> design-time features.
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.Designer.WKComponentActionList">
+            <summary>
+            Initializes a new instance of the <see cref="T:WK.Libraries.FontsInstallerNS.Designer.WKComponentActionList"/> class.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Designer.WKComponentActionList.GetSortedActionItems">
+            <summary>
+            Implementation of this abstract method creates Smart Tag items,
+            associates their targets, and collects them into a list.
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.Helpers.Shadower">
+            <summary>
+            This class is primarily used to apply
+            a neat and decent drop-shadow effect
+            to any Windows Form using the method
+            <see cref="M:WK.Libraries.FontsInstallerNS.Helpers.Shadower.ApplyShadows(System.Windows.Forms.Form)"/>.
+            </summary>
+        </member>
+        <member name="T:WK.Libraries.FontsInstallerNS.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Properties.Resources.Install">
+             <summary>
+               Looks up a localized string similar to &apos; Modified for better readability &amp; UX.
+            &apos; *************************************
+            &apos; This script simply installs the fonts located within 
+            &apos; its current directory; if any/all of the fonts are 
+            &apos; already installed, then they&apos;ll be ignored. 
+            
+            &apos; Please Preserve Contents.
+            &apos; *************************************
+            
+            Set filesystem_object = CreateObject(&quot;Scripting.FileSystemObject&quot;)
+            SourceFolder = filesystem_object.GetParentFolderName(Wscript.ScriptFullName)
+            
+            Const FONTS = &amp;H14&amp;
+            
+            Set shell_object  = Creat [rest of string was truncated]&quot;;.
+             </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Properties.Resources.wk_fonts_installer">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.Views.Editors.FontSelector.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Views.Editors.FontSelector.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Views.Editors.FontSelector.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.Views.Editors.StringsEditor.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Views.Editors.StringsEditor.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Views.Editors.StringsEditor.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Views.Forms.TaskWait.UserInvoked">
+            <summary>
+            Gets or sets a value indicating whether
+            the user invoked this dialog manually.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Views.Forms.TaskWait.RestartOnFinish">
+            <summary>
+            Gets or sets a value indicating whether the target 
+            application should restart once the timeout completes.
+            </summary>
+        </member>
+        <member name="P:WK.Libraries.FontsInstallerNS.Views.Forms.TaskWait.Progress">
+            <summary>
+            Gets or sets the progress percentage of any specific task taking place.
+            </summary>
+        </member>
+        <member name="F:WK.Libraries.FontsInstallerNS.Views.Forms.TaskWait.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Views.Forms.TaskWait.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:WK.Libraries.FontsInstallerNS.Views.Forms.TaskWait.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>
